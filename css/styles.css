@@ -1,0 +1,482 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(180deg, #ffff7a 0%, #3fc6c3 100%) fixed;
+    background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#logo-container {
+    width: 60vw;
+    height: 24vh;
+    background: transparent;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    overflow: visible;
+}
+
+#animation-container {
+    width: 28vw;
+    height: 28vw;
+    background: transparent;
+    border: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.address-container {
+    position: relative;
+    margin: 0;
+    padding: 1vh 2.2vw;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 100px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    will-change: transform;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.address-container:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.15) translateY(-6px) rotate(2deg);
+    box-shadow: 0 15px 50px 0 rgba(31, 38, 135, 0.2);
+}
+
+.address-container:active {
+    transform: scale(0.98) rotate(-1deg);
+}
+
+.address {
+    color: white;
+    font-size: 1.4vw;
+    font-weight: normal;
+    margin: 0;
+    user-select: none;
+    font-family: 'Sour Gummy', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+@keyframes copied {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(2deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.copied {
+    animation: copied 0.4s ease;
+}
+
+.copied-message {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    color: #3fc6c3;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-family: 'Sour Gummy', cursive;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.copied-message.show {
+    opacity: 1;
+    top: -50px;
+}
+
+.main-content {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(2, 6vw);
+    gap: 2vw;
+    justify-content: end;
+}
+
+.social-links a:last-child {
+    grid-column: span 2;
+    justify-self: center;
+    margin-top: -15px;
+}
+
+.social-bubble {
+    width: 6vw;
+    height: 6vw;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    will-change: transform;
+    cursor: pointer;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.social-bubble:hover {
+    transform: scale(2) translateY(-4px) rotate(8deg);
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 60px 0 rgba(31, 38, 135, 0.25);
+}
+
+.social-bubble:active {
+    transform: scale(0.95) rotate(-4deg);
+}
+
+.social-bubble img {
+    width: 60%;
+    height: 60%;
+    filter: brightness(0) invert(1);
+}
+
+.buy-section {
+    display: none;
+}
+
+.buy-button {
+    padding: 1vh 2.2vw;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 100px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-family: 'Sour Gummy', cursive;
+    font-size: 1.4vw;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    will-change: transform;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buy-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.15) translateY(-6px) rotate(2deg);
+    box-shadow: 0 15px 50px 0 rgba(31, 38, 135, 0.2);
+}
+
+.buy-button:active {
+    transform: scale(0.98) translateY(0) rotate(-1deg);
+}
+
+.social-bubble img[alt="DexScreener"] {
+    width: auto;
+    height: 70%;
+    filter: none;
+    object-fit: contain;
+    max-width: 70%;
+}
+
+.bottom-buttons {
+    position: absolute;
+    bottom: 8vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 2;
+}
+
+.twitter-feed-container {
+    grid-column: 3;
+    justify-self: start;
+    margin-left: 0;
+    margin-right: 0;
+    width: 24vw;
+    height: 65vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    position: relative;
+}
+
+.twitter-feed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.twitter-feed iframe {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.twitter-feed iframe::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+}
+
+.twitter-feed iframe::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--scrollbar-width);
+}
+
+.twitter-feed iframe::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: var(--scrollbar-width);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background-clip: padding-box;
+}
+
+.twitter-feed iframe::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.twitter-feed::before,
+.twitter-feed::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: var(--mask-height);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.twitter-feed::before {
+    top: 0;
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+}
+
+.twitter-feed::after {
+    bottom: 0;
+    background: linear-gradient(to top, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+}
+
+.twitter-timeline {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+iframe#twitter-widget-0 {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.mobile-cat {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+}
+
+.side-content-left {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20vw;
+    margin-top: -35vh;
+}
+
+.side-content-right {
+    grid-column: 3;
+    grid-row: 2;
+    margin-left: 20vw;
+    margin-top: -35vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        height: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        position: relative;
+    }
+
+    /* 1. Logo */
+    #logo-container {
+        position: relative;
+        width: 85vw;
+        height: 25vh;
+        top: 0;
+        left: 0;
+        transform: none;
+        margin: 4vh auto;
+    }
+
+    /* 2. Static Cat Image */
+    #animation-container {
+        display: none;
+    }
+
+    .mobile-cat {
+        display: block !important;
+        width: 80vw;
+        margin: 0 auto 2vh auto;
+        visibility: visible;
+        opacity: 1;
+        position: relative;
+    }
+
+    /* 3. Social Links */
+    .side-content-left {
+        width: 100%;
+        padding-right: 0;
+        margin: 4vh 0;
+        order: 3;
+    }
+
+    .social-links {
+        display: grid;
+        grid-template-columns: repeat(3, 20vw);
+        width: 90vw;
+        gap: 3vw;
+        margin: 4vh auto;
+        justify-content: center;
+    }
+
+    .social-links a:last-child {
+        grid-column: auto;
+        margin-top: 0;
+    }
+
+    .social-bubble {
+        width: 20vw;
+        height: 20vw;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-bubble img {
+        width: 50%;
+        height: 50%;
+        filter: brightness(0) invert(1);
+    }
+
+    /* 4. Twitter Widget */
+    .side-content-right {
+        width: 100%;
+        padding-left: 0;
+        order: 4;
+    }
+
+    .twitter-feed-container {
+        width: 90vw;
+        height: 60vh;
+        margin: 4vh auto;
+        position: relative;
+        left: 0;
+        transform: none;
+    }
+
+    /* 5. Pills */
+    .bottom-buttons {
+        position: relative;
+        width: 90vw;
+        margin: 4vh auto;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        order: 5;
+    }
+
+    .buy-button, .address-container {
+        width: 100%;
+        text-align: center;
+        font-size: 5vw;
+        padding: 2vh 4vw;
+    }
+
+    .address {
+        font-size: 5vw;
+    }
+
+    /* Reset all desktop-specific positioning */
+    .side-content-left, .side-content-right {
+        position: relative;
+        margin: 0;
+        padding: 0;
+    }
+}
+ 
